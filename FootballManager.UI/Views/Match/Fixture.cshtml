@@ -1,0 +1,99 @@
+﻿@using FootballManager.Application.Models.View;
+@{
+    ViewData["Title"] = "Football Manager - Season Fixture";
+}
+@{
+    var fixture = Model as List<SeasonMatchFixtureGroup>;
+    if (fixture == null) { fixture = new List<SeasonMatchFixtureGroup>(); }
+    string seasonName = "";
+    if (fixture.Count > 0) { seasonName = fixture[0].SeasonName; }
+    int matchCount = 0;
+}
+
+
+<div id="container" class="container">
+    @if (@String.IsNullOrEmpty(seasonName) == false)
+    {
+        <h3 style="padding-left:15%; margin-bottom:10px;">@seasonName</h3>
+    }
+    @for (var roundIndex = 0; roundIndex < fixture.Count; roundIndex++)
+    {
+        <h4 style="margin-bottom:10px; margin-top:30px; text-align:center;">Week @fixture[roundIndex].SeasonRound</h4>
+        @for (var matchIndex = 0; matchIndex < fixture[roundIndex].Matches.Count; matchIndex++, matchCount++)
+        {
+            <p style="display:flex; flex-direction:row; width:100; justify-content:center; gap:10px; text-align:center;">
+                <span style="width:33%;">@fixture[roundIndex].Matches[matchIndex].MatchDatePlanned.ToString("dd/MM/yyyy")</span>
+                <span> - </span>
+                <span style="width:33%;">@fixture[roundIndex].Matches[matchIndex].MatchDatePlanned.ToString("HH:mm")</span>
+            </p>
+            <button style="display:flex; flex-direction:row; justify-content:space-around; width:100%; padding:10px; margin-bottom:10px;" class="card" type="button" data-bs-toggle="collapse" data-bs-target='@("#collapseMatch" + @matchCount)' aria-expanded="false" aria-controls='@("collapseMatch" + @matchCount)'>
+                <span style="width:33%;">@fixture[roundIndex].Matches[matchIndex].HomeTeamName</span>
+                @if (fixture[roundIndex].Matches[matchIndex].MatchWinner == null)
+                {
+                    <span style="width:34%;"></span>
+                }
+                else
+                {
+                    <span style="width:34%;">@fixture[roundIndex].Matches[matchIndex].HomeTeamFinalScore - @fixture[roundIndex].Matches[matchIndex].AwayTeamFinalScore</span>
+                }
+                <span style="width:33%;">@fixture[roundIndex].Matches[matchIndex].AwayTeamName </span>
+            </button>
+
+            <div>
+                <div class="collapse" id='@("collapseMatch" + @matchCount)'>
+                    @if (@fixture[roundIndex].Matches[matchIndex].Goals[0].GoalScoredById != null && @fixture[roundIndex].Matches[matchIndex].Goals[0].GoalScoredById != 0)
+                    {
+                        <div class="card card-body">
+
+                            <div style="display:flex; flex-direction:row; justify-content:space-around; width:100%; padding:10px; flex-wrap:wrap; text-align:center;">
+                                <span style="width:10%; margin-bottom:10px;">Minute</span>
+                                <span style="width:30%; margin-bottom:10px;">Team</span>
+                                <span style="width:30%; margin-bottom:10px;">Scored By</span>
+                                <span style="width:30%; margin-bottom:10px;">Assist By</span>
+
+                                @for (var goalIndex = 0; goalIndex < fixture[roundIndex].Matches[matchIndex].Goals.Count; goalIndex++)
+                                {
+                                    @if (@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].MatchSideScored.Value == FootballManager.Domain.Enums.MatchSideType.HomeTeam)
+                                    {
+                                        @if (@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalAssistById != null && @fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalAssistById != 0)
+                                        {
+                                            <span style="width:10%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalMinuteScored</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].HomeTeamName</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalScoredByName</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalAssistByName</span>
+                                        }
+                                        else
+                                        {
+                                            <span style="width:10%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalMinuteScored</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].HomeTeamName</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalScoredByName</span>
+                                            <span style="width:30%;"></span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @if (@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalAssistById != null && @fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalAssistById != 0)
+                                        {
+                                            <span style="width:10%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalMinuteScored</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].AwayTeamName</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalScoredByName</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalAssistByName</span>
+                                        }
+                                        else
+                                        {
+
+                                            <span style="width:10%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalMinuteScored</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].AwayTeamName</span>
+                                            <span style="width:30%;">@fixture[roundIndex].Matches[matchIndex].Goals[goalIndex].GoalScoredByName</span>
+                                            <span style="width:30%;"></span>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,51 @@
+﻿@using FootballManager.Application.Models.View;
+@{
+    ViewData["Title"] = "Football Manager - Team Stats";
+}
+@{
+    var team = Model as SeasonTeamStandings;
+    if (team == null) { team = new SeasonTeamStandings(); }
+    string seasonName = "";
+    if (!string.IsNullOrEmpty(team.SeasonName)) { seasonName = team.SeasonName; }
+}
+@{
+    <div class="container">
+        <ul class="list-group">
+            <li class="list-group-item">SeasonName: @seasonName</li>
+            <li class="list-group-item">TeamName: @team.TeamName</li>
+            <li class="list-group-item">ManagerName: @team.ManagerName</li>
+            <li class="list-group-item">MatchesPlayedTotal: @team.MatchesPlayedTotal</li>
+            <li class="list-group-item">PointTotal: @team.PointTotal</li>
+            <li class="list-group-item">ScoredTotal: @team.ScoredTotal</li>
+            <li class="list-group-item">ConcededTotal: @team.ConcededTotal</li>
+            <li class="list-group-item">MatchesWonTotal: @team.MatchesWonTotal</li>
+            <li class="list-group-item">MatchesDrawTotal: @team.MatchesDrawTotal</li>
+            <li class="list-group-item">MatchesLostTotal: @team.MatchesLostTotal</li>
+            <li class="list-group-item">GoalAvarageTotal: @team.GoalAvarageTotal</li>
+            <li class="list-group-item">HomeMatchesPlayed: @team.HomeMatchesPlayed</li>
+            <li class="list-group-item">HomePointTotal: @team.HomePointTotal</li>
+            <li class="list-group-item">HomeMatchesWon: @team.HomeMatchesWon</li>
+            <li class="list-group-item">HomeMatchesDraw: @team.HomeMatchesDraw</li>
+            <li class="list-group-item">HomeMatchesLost: @team.HomeMatchesLost</li>
+            <li class="list-group-item">HomeFullTimeScoreSum: @team.HomeFullTimeScoreSum</li>
+            <li class="list-group-item">HomeOvertimeScoreSum: @team.HomeOvertimeScoreSum</li>
+            <li class="list-group-item">HomeScoreSum: @team.HomeScoreSum</li>
+            <li class="list-group-item">HomeFullTimeConcededSum: @team.HomeFullTimeConcededSum</li>
+            <li class="list-group-item">HomeOvertimeConcededSum: @team.HomeOvertimeConcededSum</li>
+            <li class="list-group-item">HomeConcededSum: @team.HomeConcededSum</li>
+            <li class="list-group-item">HomeGoalAvarage: @team.HomeGoalAvarage</li>
+            <li class="list-group-item">AwayMatchesPlayed: @team.AwayMatchesPlayed</li>
+            <li class="list-group-item">AwayPointTotal: @team.AwayPointTotal</li>
+            <li class="list-group-item">AwayMatchesWon: @team.AwayMatchesWon</li>
+            <li class="list-group-item">AwayMatchesDraw: @team.AwayMatchesDraw</li>
+            <li class="list-group-item">AwayMatchesLost: @team.AwayMatchesLost</li>
+            <li class="list-group-item">AwayFullTimeScoreSum: @team.AwayFullTimeScoreSum</li>
+            <li class="list-group-item">AwayOvertimeScoreSum: @team.AwayOvertimeScoreSum</li>
+            <li class="list-group-item">AwayScoreSum: @team.AwayScoreSum</li>
+            <li class="list-group-item">AwayFullTimeConcededSum: @team.AwayFullTimeConcededSum</li>
+            <li class="list-group-item">AwayOvertimeConcededSum: @team.AwayOvertimeConcededSum</li>
+            <li class="list-group-item">AwayConcededSum: @team.AwayConcededSum</li>
+            <li class="list-group-item">AwayGoalAvarage: @team.AwayGoalAvarage</li>
+        </ul>
+    </div>
+}

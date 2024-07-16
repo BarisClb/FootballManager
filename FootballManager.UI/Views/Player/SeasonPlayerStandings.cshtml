@@ -1,0 +1,45 @@
+﻿@using FootballManager.Application.Models.View;
+@{
+    ViewData["Title"] = "Football Manager - Player Standings";
+}
+@{
+    var players = Model as List<SeasonPlayerStandings>;
+    if (players == null) { players = new List<SeasonPlayerStandings>(); }
+    var seasonName = "";
+    if (players.Any()) { seasonName = players.FirstOrDefault()?.SeasonName; }
+    int playerIndex = 1;
+}
+<div class="container">
+    <table class="table caption-top">
+        <h3 style="padding-left:15%; margin-bottom:10px;">@seasonName</h3>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Team</th>
+                <th scope="col">Matches Played</th>
+                <th scope="col">Goals Scored</th>
+                <th scope="col">Goals Assisted</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                //@foreach (var player in Model)
+                foreach (var player in players)
+                {
+                    <tr>
+                        <th scope="row">@playerIndex</th>
+                        <td>@player.PlayerNumber</td>
+                        <td>@player.PlayerName</td>
+                        <td>@player.TeamName</td>
+                        <td>@player.MatchesPlayed</td>
+                        <td>@player.GoalsScored</td>
+                        <td>@player.GoalsAssisted</td>
+                    </tr>
+                    playerIndex++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

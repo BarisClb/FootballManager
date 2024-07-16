@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  footballmanager.ui:
+    image: footballmanager-ui
+    build:
+      context: .
+      dockerfile: FootballManager.UI/Dockerfile

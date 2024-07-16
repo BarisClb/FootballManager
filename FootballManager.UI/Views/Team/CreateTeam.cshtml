@@ -1,0 +1,175 @@
+﻿@using FootballManager.Application.Helpers;
+@using FootballManager.Application.Models.Requests;
+@using FootballManager.Application.Models.View;
+@model CreateTeamRequestForm;
+@{
+    ViewData["Title"] = "Football Manager - Create Team";
+}
+@{
+    var premadeTeams = ViewBag.PremadeTeams as List<PremadeTeam>;
+    var createTeamRequest = ViewBag.CreateTeamRequest as CreateTeamRequest;
+    var seasonId = Model.SeasonId ?? createTeamRequest?.SeasonId ?? 0;
+}
+
+<div class="container">
+    <div class="row" style="margin-bottom:20px;">
+        <h2 style="margin-left:50px; margin-bottom:20px;">Premade Teams</h2>
+        @foreach (var premadeTeam in premadeTeams)
+        {
+            <div class="col-6">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href='@("/Team/CreateTeam/" + @seasonId + "/" +  + @premadeTeam.Id)' role="tab" aria-controls="home">@premadeTeam.Name</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <form asp-controller="Team" asp-action="CreateTeamForm" method="post">
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.TeamName, "Team Name", new { @class = "form-label", @for = "teamNameInput"})
+            @Html.TextBoxFor(model => model.TeamName, new { @class = "form-control", @id = "teamNameInput", @type = "text" , aria_describedby = "teamName"})
+        </div>
+
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player1Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player1Number, "Position 1 Number", new { @class = "form-label", @for = "player1NumberInput"})
+                @Html.TextBoxFor(model => model.Player1Number, new { @class = "form-control", @id = "player1NumberInput", @type = "number" , aria_describedby = "player1Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player1Name, "Position 1 Name", new { @class = "form-label", @for = "player1NameInput"})
+                @Html.TextBoxFor(model => model.Player1Name, new { @class = "form-control", @id = "player1NameInput", @type = "text" , aria_describedby = "player1Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player2Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player2Number, "Position 2 Number", new { @class = "form-label", @for = "player2NumberInput"})
+                @Html.TextBoxFor(model => model.Player2Number, new { @class = "form-control", @id = "player2NumberInput", @type = "number" , aria_describedby = "player2Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player2Name, "Position 2 Name", new { @class = "form-label", @for = "player2NameInput"})
+                @Html.TextBoxFor(model => model.Player2Name, new { @class = "form-control", @id = "player2NameInput", @type = "text" , aria_describedby = "player2Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player3Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player3Number, "Position 3 Number", new { @class = "form-label", @for = "player3NumberInput"})
+                @Html.TextBoxFor(model => model.Player3Number, new { @class = "form-control", @id = "player3NumberInput", @type = "number" , aria_describedby = "player3Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player3Name, "Position 3 Name", new { @class = "form-label", @for = "player3NameInput"})
+                @Html.TextBoxFor(model => model.Player3Name, new { @class = "form-control", @id = "player3NameInput", @type = "text" , aria_describedby = "player3Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player4Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player4Number, "Position 4 Number", new { @class = "form-label", @for = "player4NumberInput"})
+                @Html.TextBoxFor(model => model.Player4Number, new { @class = "form-control", @id = "player4NumberInput", @type = "number" , aria_describedby = "player4Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player4Name, "Position 4 Name", new { @class = "form-label", @for = "player4NameInput"})
+                @Html.TextBoxFor(model => model.Player4Name, new { @class = "form-control", @id = "player4NameInput", @type = "text" , aria_describedby = "player4Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player5Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player5Number, "Position 5 Number", new { @class = "form-label", @for = "player5NumberInput"})
+                @Html.TextBoxFor(model => model.Player5Number, new { @class = "form-control", @id = "player5NumberInput", @type = "number" , aria_describedby = "player5Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player5Name, "Position 5 Name", new { @class = "form-label", @for = "player5NameInput"})
+                @Html.TextBoxFor(model => model.Player5Name, new { @class = "form-control", @id = "player5NameInput", @type = "text" , aria_describedby = "player5Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player6Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player6Number, "Position 6 Number", new { @class = "form-label", @for = "player6NumberInput"})
+                @Html.TextBoxFor(model => model.Player6Number, new { @class = "form-control", @id = "player6NumberInput", @type = "number" , aria_describedby = "player6Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player6Name, "Position 6 Name", new { @class = "form-label", @for = "player6NameInput"})
+                @Html.TextBoxFor(model => model.Player6Name, new { @class = "form-control", @id = "player6NameInput", @type = "text" , aria_describedby = "player6Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player7Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player7Number, "Position 7 Number", new { @class = "form-label", @for = "player7NumberInput"})
+                @Html.TextBoxFor(model => model.Player7Number, new { @class = "form-control", @id = "player7NumberInput", @type = "number" , aria_describedby = "player7Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player7Name, "Position 7 Name", new { @class = "form-label", @for = "player7NameInput"})
+                @Html.TextBoxFor(model => model.Player7Name, new { @class = "form-control", @id = "player7NameInput", @type = "text" , aria_describedby = "player7Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player8Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player8Number, "Position 8 Number", new { @class = "form-label", @for = "player8NumberInput"})
+                @Html.TextBoxFor(model => model.Player8Number, new { @class = "form-control", @id = "player8NumberInput", @type = "number" , aria_describedby = "player8Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player8Name, "Position 8 Name", new { @class = "form-label", @for = "player8NameInput"})
+                @Html.TextBoxFor(model => model.Player8Name, new { @class = "form-control", @id = "player8NameInput", @type = "text" , aria_describedby = "player8Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player9Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player9Number, "Position 9 Number", new { @class = "form-label", @for = "player9NumberInput"})
+                @Html.TextBoxFor(model => model.Player9Number, new { @class = "form-control", @id = "player9NumberInput", @type = "number" , aria_describedby = "player9Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player9Name,"Position 9 Name",  new { @class = "form-label", @for = "player9NameInput"})
+                @Html.TextBoxFor(model => model.Player9Name, new { @class = "form-control", @id = "player9NameInput", @type = "text" , aria_describedby = "player9Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player10Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player10Number, "Position 10 Number", new { @class = "form-label", @for = "player10NumberInput"})
+                @Html.TextBoxFor(model => model.Player10Number, new { @class = "form-control", @id = "player10NumberInput", @type = "number" , aria_describedby = "player10Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player10Name, "Position 10 Name", new { @class = "form-label", @for = "player10NameInput"})
+                @Html.TextBoxFor(model => model.Player10Name, new { @class = "form-control", @id = "player10NameInput", @type = "text" , aria_describedby = "player10Name" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.HiddenFor(model => model.Player11Position)
+            <div class="col-4">
+                @Html.LabelFor(model => model.Player11Number, "Position 11 Number", new { @class = "form-label", @for = "player11NumberInput"})
+                @Html.TextBoxFor(model => model.Player11Number, new { @class = "form-control", @id = "player11NumberInput", @type = "number" , aria_describedby = "player11Number"})
+            </div>
+            <div class="col-8">
+                @Html.LabelFor(model => model.Player11Name, "Position 11 Name", new { @class = "form-label", @for = "player11NameInput"})
+                @Html.TextBoxFor(model => model.Player11Name, new { @class = "form-control", @id = "player11NameInput", @type = "text" , aria_describedby = "player11Name" })
+            </div>
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.SeasonId, "Season Id", new { @class = "form-label", @for = "seasonIdInput"})
+            @Html.TextBoxFor(model => model.SeasonId, new { @class = "form-control", @id = "seasonIdInput", @type = "number" , aria_describedby = "seasonId"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.SeasonPassPassword, "Season Pass Password", new { @class = "form-label", @for = "seasonPassPasswordInput"})
+            @Html.TextBoxFor(model => model.SeasonPassPassword, new { @class = "form-control", @id = "seasonPassPasswordInput", @type = "text" , aria_describedby = "seasonPassPassword"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.UserUsername, "Username", new { @class = "form-label", @for = "usernameInput"})
+            @Html.TextBoxFor(model => model.UserUsername, new { @class = "form-control", @id = "usernameInput", @type = "text" , aria_describedby = "username"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.UserPassword, "Password", new { @class = "form-label", @for = "passwordInput"})
+            @Html.TextBoxFor(model => model.UserPassword, new { @class = "form-control", @id = "passwordInput", @type = "password" , aria_describedby = "password"})
+        </div>
+
+        <button type="submit" class="btn btn-success" style="width:100%;">Submit</button>
+    </form>
+</div>

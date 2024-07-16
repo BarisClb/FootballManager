@@ -1,0 +1,52 @@
+﻿@using FootballManager.Application.Models.View;
+@{
+    ViewData["Title"] = "Football Manager - Team Standings";
+}
+@{
+    var teams = Model as List<SeasonTeamStandings>;
+    if (teams == null) { teams = new List<SeasonTeamStandings>(); }
+    string seasonName = "";
+    if (teams.Count > 0) { seasonName = teams[0].SeasonName; }
+    int teamCount = 1;
+}
+<div class="container">
+    <table class="table caption-top">
+        <h3 style="padding-left:15%; margin-bottom:10px;">@seasonName</h3>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Team Name</th>
+                <th scope="col">Points</th>
+                <th scope="col">Matches Played</th>
+                <th scope="col">Matches Won</th>
+                <th scope="col">Matches Draw</th>
+                <th scope="col">Matches Lost</th>
+                <th scope="col">Goals Scored</th>
+                <th scope="col">Goals Conceded</th>
+                <th scope="col">Avarage</th>
+                <th scope="col">Manager Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var team in teams)
+                {
+                    <tr>
+                        <th scope="row">@teamCount</th>
+                        <td>@team.TeamName</td>
+                        <td>@team.PointTotal</td>
+                        <td>@team.MatchesPlayedTotal</td>
+                        <td>@team.MatchesWonTotal</td>
+                        <td>@team.MatchesDrawTotal</td>
+                        <td>@team.MatchesLostTotal</td>
+                        <td>@team.ScoredTotal</td>
+                        <td>@team.ConcededTotal</td>
+                        <td>@team.GoalAvarageTotal</td>
+                        <td>@team.ManagerName</td>
+                    </tr>
+                    teamCount++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
